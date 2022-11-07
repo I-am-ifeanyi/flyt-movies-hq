@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Nunito', sans-serif;
+  box-sizing: border-box;
+  
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  position: relative;
+
+}
+
+.nav-child-links {
+  display: none;
+  color: red;
+  position: absolute;
+}
+
+.nav-links li:hover .nav-child-links {
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+  background-color: #1f2c3a;
+  color: whitesmoke
+}
