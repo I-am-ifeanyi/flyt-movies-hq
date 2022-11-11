@@ -7,5 +7,3 @@ const ContextAPI = (props) => {
     </div>
   )
 }
-
-export default ContextAPI
