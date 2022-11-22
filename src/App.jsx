@@ -14,7 +14,7 @@ import ErrorPage from "./Pages/ErrorPage";
 
 const App = () => {
   return (
-    <div className="flex flex-col min-h-[100vh] relative">
+    <div className="flex flex-col min-h-[100vh] relative bg-gray-100">
     <Header />
     <Routes>
       <Route index element={<Home />} />

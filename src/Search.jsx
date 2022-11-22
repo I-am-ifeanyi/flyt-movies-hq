@@ -1,17 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { newContextAPI } from "./ContextAPI";
+import { useNavigate } from "react-router-dom";
 
 import { AiOutlineSearch } from "react-icons/ai";
 
 const Search = ({ toggleDisplaySearch }) => {
-  const { query, searchSubmit, searchQuery, focusPoint, focusOnSearch} = useContext(newContextAPI);
+  const { query, searchSubmit, searchQuery, focusPoint, focusOnSearch } =
+    useContext(newContextAPI);
+  const navigate = useNavigate();
 
- 
+  const redirect = () => {
+    navigate("/searchResults");
+  };
 
   return (
     <div>
       <form
-        className="flex items-center p-1 shadow-lg px-8"
+        className="flex items-center p-1 shadow-lg pl-8"
         onSubmit={searchSubmit}
       >
         <label htmlFor="search"></label>
@@ -27,8 +32,10 @@ const Search = ({ toggleDisplaySearch }) => {
           onClick={focusOnSearch}
         />
         <button
-          className="ml-auto h-full px-2 py-1 bg-slate-900 text-white rounded text-sm"
-          onClick={toggleDisplaySearch} value="submit"
+          className="ml-auto h-full px-8 py-2 bg-[#1f2c3a] text-white rounded-xl"
+          onClick={() => {
+            toggleDisplaySearch, redirect();
+          }}
         >
           Search
         </button>

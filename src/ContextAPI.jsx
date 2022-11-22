@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 
+
 const newContextAPI = React.createContext();
 
 const ContextAPI = ({ children }) => {
@@ -12,37 +13,36 @@ const ContextAPI = ({ children }) => {
 
   const searchSubmit = (e) => {
     e.preventDefault();
-    const movieApi = `https://api.themoviedb.org/3/search/multi?api_key=711b673e8a9d9a73798bfbd7f7e018b7&language=en-US&page=1&include_adult=false&query=${query}`;
+    const movieTvApi = `https://api.themoviedb.org/3/search/multi?api_key=711b673e8a9d9a73798bfbd7f7e018b7&language=en-US&page=1&include_adult=false&query=${query}`;
     async function fetchData() {
       try {
         setIsLoading(true)
-        const response = await fetch(movieApi);
+        const response = await fetch(movieTvApi);
         if (!response.ok) {
-          throw Error(
-            "Search not found, please check your spelling or type again"
-          );
+          throw Error(response.status);
         }
 
         const movieData = await response.json();
         if(movieData.results < 1) {
           setIsFetchNotFound("Sorry, your search could not be found, check spelling and try again...")
-        }
+          
+        } 
         setMovieSearch(movieData.results);
         setIsLoading(false)
+       
       } catch (Error) {
         setIsFetchNotFound(Error.message);
       }
+      
     
     }
-    
-    console.log(movieSearch);
     fetchData();
   };
-
 
   const focusOnSearch = () => {
     focusPoint.current.style.border = "2px dotted gray";
     focusPoint.current.focus();
+
   };
 
   const searchQuery = (e) => {
@@ -51,6 +51,7 @@ const ContextAPI = ({ children }) => {
 
   const toggleDisplaySearch = () => {
     setDisplaySearch((prev) => !prev);
+    setIsFetchNotFound('')
   };
   const switchOffDisplay = () => {
     setDisplaySearch(false);

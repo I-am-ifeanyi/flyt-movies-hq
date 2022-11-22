@@ -7,6 +7,9 @@
 body {
   font-family: "Nunito", sans-serif;
   box-sizing: border-box;
+  scrollbar-width: thin;          /* "auto" or "thin" */
+  scrollbar-color: blue orange;
+  
 }
 
 .nav-links {
