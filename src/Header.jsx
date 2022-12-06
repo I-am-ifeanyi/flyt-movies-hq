@@ -12,14 +12,14 @@ const Header = () => {
 
   return (
     <div className="relative">
-      <div className="bg-[#1f2c3a] text-white font-bold h-10 px-10 py-8 flex items-center cursor-pointer opacity-90 border-b-2 relative z-50">
+      <div className="bg-[#1f2c3a] text-white font-bold h-10 px-10 py-8 flex items-center cursor-pointer shrink-0 opacity-90 border-b-2 relative z-50">
         <Link to="/">
           {" "}
-          <h1 className="text-xl mr-10 p-1 rounded bg-gradient-to-r from-purple-500 to-pink-500">
+          <h1 className="text-xl mr-10 p-1 rounded bg-gradient-to-r flex flex-shrink-0 from-purple-500 to-pink-500">
             FlyT HQ
           </h1>
         </Link>
-        <ul className="nav-links text-sm">
+        <ul className="nav-links text-sm shrink-0 mr-10">
           <Link to="/">
             <li>Home</li>
           </Link>
@@ -78,7 +78,7 @@ const Header = () => {
             </ul>
           </li>
         </ul>
-        <div className="flex ml-auto gap-10 items-center text-">
+        <div className="flex ml-auto gap-10 items-center shrink-0">
           <FaPlus />
           <h1 className="border px-1 rounded font-medium text-[12px]">EN</h1>
           <IoMdNotifications />

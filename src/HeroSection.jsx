@@ -2,10 +2,19 @@ import React from "react";
 
 import Search from "./Search";
 
-const HeroSection = ({ backDrop }) => {
+const HeroSection = ({ trending }) => {
+  // const filtered = trending.find((filtered) => filtered);
+  const backdrop = trending[0]?.backdrop_path;
+  const style = {
+    backgroundImage: `url('http://image.tmdb.org/t/p/w500${backdrop}')`,
+    height: "400px",
+    backgroundSize: "cover",
+  };
+
   return (
     <div
-      className={`h-[400px] bg-[url('http://image.tmdb.org/t/p/w500${backDrop}')] transition-all duration-700  bg-cover bg-no-repeat px-10 py-10`}
+      className={`transition-all duration-700 bg-no-repeat px-10 py-10`}
+      style={style}
     >
       <div className="flex flex-col h-full relative">
         <h1
@@ -23,6 +32,8 @@ const HeroSection = ({ backDrop }) => {
       </div>
     </div>
   );
+
+  // bg-[url('http://image.tmdb.org/t/p/w500${backDrop}')]
 };
 
 export default HeroSection;
