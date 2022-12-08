@@ -134,7 +134,7 @@ const Home = () => {
                           <img
                             src={`http://image.tmdb.org/t/p/w500${result.poster_path}`}
                             alt={result.title || result.name}
-                            className="w-full h-full rounded-xl border-b-4 border-green-400 "
+                            className="w-full h-full rounded-xl border-b-4 border-green-400 hover:scale-105 transition-all duration-500 "
                           />
                         </a>
                         <figcaption className="absolute border w-6 h-8 flex items-center justify-center text-gray-200 bg-gray-800 rounded-full z-40 -mt-5 ml-3 border-2 border-green-400 text-sm">

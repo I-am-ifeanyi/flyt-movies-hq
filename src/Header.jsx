@@ -8,7 +8,8 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 
 const Header = () => {
-  const { displaySearch, toggleDisplaySearch, focusOnSearch } = useContext(newContextAPI);
+  const { displaySearch, toggleDisplaySearch, focusOnSearch } =
+    useContext(newContextAPI);
 
   return (
     <div className="relative">
@@ -83,17 +84,14 @@ const Header = () => {
           <h1 className="border px-1 rounded font-medium text-[12px]">EN</h1>
           <IoMdNotifications />
           <CgProfile />
-          {displaySearch ? (
-            <FaTimes
-              className="text-2xl text-[#AED6F1]"
-              onClick={toggleDisplaySearch}
-            />
-          ) : (
+
+          <Link to="searchResults">
+            {" "}
             <AiOutlineSearch
               className="text-2xl text-[#AED6F1] font-bold"
               onClick={focusOnSearch}
             />
-          )}
+          </Link>
         </div>
       </div>
       {/* {displaySearch && <Search
