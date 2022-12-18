@@ -13,7 +13,7 @@ const Header = () => {
 
   return (
     <div className="relative">
-      <div className="bg-[#1f2c3a] text-white font-bold h-10 px-10 py-8 flex items-center cursor-pointer shrink-0 opacity-90 border-b-2 relative z-50">
+      <div className="bg-[#1f2c3a] text-gray-100 font-bold h-10 px-10 py-8 flex items-center cursor-pointer shrink-0 opacity-90 border-b-2 relative z-50">
         <Link to="/">
           {" "}
           <h1 className="text-xl mr-10 p-1 rounded bg-gradient-to-r flex flex-shrink-0 from-purple-500 to-pink-500">

@@ -50,7 +50,7 @@ const Home = () => {
     selectedMovieCategory,
   ] = Categories();
 
-  // console.log(selectedCategory)
+  // console.log(weeklyTrends)
 
   return (
     <>
@@ -214,6 +214,18 @@ const Home = () => {
                       className=" mt-10 relative  transition-all duration-700"
                       key={result.id}
                     >
+                    {subActions === result.id ? (
+                      <GiCancel
+                        className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
+                        onClick={() => selectItem(result.id)}
+                      />
+                    ) : (
+                      <HiOutlineDotsCircleHorizontal
+                        className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
+                        onClick={() => selectItem(result.id)}
+                      />
+                    )}
+                    <Link to={`/${result.id}`}>
                       <figure className="h-60 w-44">
                         <a href="#" target="_blank">
                           <img
@@ -240,6 +252,27 @@ const Home = () => {
                           ? result.first_air_date
                           : "Date unavailable"}
                       </p>
+                      </Link>
+                      {subActions === result.id && (
+                        <div className="bg-gray-100 w-32 shadow-xl flex flex-col items-center justify-center -mt-64 ml-28 relative z-40 h-40 rounded">
+                          <div className="flex w-full items-center border-b-2 py-2 hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
+                            <MdOutlineList className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                            <p className="text-sm hover:scale-105">Add to list</p>
+                          </div>
+                          <div className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
+                            <BsFillSuitHeartFill className="mr-3 ml-4 hover:scale-105" />{" "}
+                            <p className="text-sm hover:scale-105">Favorite</p>
+                          </div>
+                          <div className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
+                            <BsFillBookmarkPlusFill className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                            <p className="text-sm hover:scale-105">Watchlist</p>
+                          </div>
+                          <div className="flex w-full items-center py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
+                            <MdStarRate className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                            <p className="text-sm hover:scale-105">Your Rating</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   );
                 })}
@@ -357,6 +390,18 @@ const Home = () => {
                     className="pt-5 relative  transition-all duration-700 "
                     key={result.id}
                   >
+                  {subActions === result.id ? (
+                    <GiCancel
+                      className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
+                      onClick={() => selectItem(result.id)}
+                    />
+                  ) : (
+                    <HiOutlineDotsCircleHorizontal
+                      className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
+                      onClick={() => selectItem(result.id)}
+                    />
+                  )}
+                  <Link to={`/${result.id}`}>
                     <figure className="h-60 w-44">
                       <a href="#" target="_blank">
                         <img
@@ -372,6 +417,7 @@ const Home = () => {
                           Math.round(result.popularity)}
                       </figcaption>
                     </figure>
+                    
                     <h1 className="mt-6 ml-3 font-extrabold tracking-wider pl-2 rounded">
                       {result.title
                         ? result.title
@@ -386,6 +432,27 @@ const Home = () => {
                         ? result.first_air_date
                         : null}
                     </p>
+                    </Link>
+                    {subActions === result.id && (
+                      <div className="bg-gray-100 w-32 shadow-xl flex flex-col items-center justify-center -mt-64 ml-28 relative z-40 h-40 rounded">
+                        <div className="flex w-full items-center border-b-2 py-2 hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
+                          <MdOutlineList className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                          <p className="text-sm hover:scale-105">Add to list</p>
+                        </div>
+                        <div className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
+                          <BsFillSuitHeartFill className="mr-3 ml-4 hover:scale-105" />{" "}
+                          <p className="text-sm hover:scale-105">Favorite</p>
+                        </div>
+                        <div className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
+                          <BsFillBookmarkPlusFill className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                          <p className="text-sm hover:scale-105">Watchlist</p>
+                        </div>
+                        <div className="flex w-full items-center py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
+                          <MdStarRate className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                          <p className="text-sm hover:scale-105">Your Rating</p>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 );
               })}

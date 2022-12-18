@@ -6,8 +6,10 @@ const HeroSection = ({ trending }) => {
   // const filtered = trending.find((filtered) => filtered);
   const backdrop = trending[0]?.backdrop_path;
   const style = {
-    backgroundImage: `url('http://image.tmdb.org/t/p/w500${backdrop}')`,
+    backgroundImage: `linear-gradient(rgba(93, 109, 126), rgba(0, 0, 0, 0.623)), url('http://image.tmdb.org/t/p/w500${backdrop}')`,
     height: "400px",
+    backgroundAttachment: "fixed",
+    backgroundPosition: "center",
     backgroundSize: "cover",
   };
 

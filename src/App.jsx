@@ -20,7 +20,6 @@ const App = () => {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/:searchDetails" element={<SearchDetails />} />
-
         <Route path="searchResults" element={<GeneralSearchResults />} />
         <Route path="Airing-Today" element={<AiringToday />} />
         <Route path="Popular" element={<Popular />} />
