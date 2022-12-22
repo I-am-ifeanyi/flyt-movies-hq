@@ -74,7 +74,6 @@ const SearchDetails = () => {
       .then((data) => setPersonsArray(data));
   }, [searchDetails]);
 
-  console.log(personsArray);
 
   const style = {
     backgroundImage: `linear-gradient(rgba(93, 109, 126), rgba(0, 0, 0, 0.623)), url('http://image.tmdb.org/t/p/w500${itemDetails.backdrop_path}')`,
@@ -104,8 +103,7 @@ const SearchDetails = () => {
   const toggleSeeMore = () => {
     setSeeMore((prev) => !prev);
   };
-
-  // console.log(itemDetails);
+ 
 
   return (
     <>
@@ -131,7 +129,7 @@ const SearchDetails = () => {
           </li>
         </ul>
 
-        <section className="border-4 h-screen border-[#1f2c3a] relative">
+        {!personsArray.name && !personsArray.place_of_birth ? <section className="border-4 h-screen border-[#1f2c3a] relative">
           <div className="h-full w-full absolute" style={style}>
             <div className="flex gap-10 justify-center items-center h-full px-10">
               <figure
@@ -169,17 +167,17 @@ const SearchDetails = () => {
                 </a>
               </figure>
 
-              <aside className="z-50 flex flex-col gap-5 px-10  text-gray-100 font-bold h-auto  bg-black/30 py-10 tracking-wider ">
+              <aside className="z-50 flex flex-col gap-5 px-10  text-gray-100 font-bold max-h-screen  bg-black/30 py-10 tracking-wider ">
                 <div className="">
                   <div className="flex gap-1 items-center text-3xl ">
-                    <h1 className="">
+                    <h1 className="shrink-0">
                       {itemDetails.title || itemDetails.name}
                     </h1>
                     <p>({year})</p>
                   </div>
-                  <div className="flex gap-1 items-center">
+                  <div className="flex gap-1 items-center shrink-0">
                     <p className="border rounded px-1">16</p>
-                    <div className="flex gap-2 mx-2">{genre}</div>
+                    <div className="flex gap-2 mx-2 shrink-0">{genre}</div>
                     <p>50m</p>
                   </div>
                 </div>
@@ -223,12 +221,12 @@ const SearchDetails = () => {
                   {itemDetails.overview && (
                     <h1 className="text-xl font-bold mt-3">Overview</h1>
                   )}
-                  <p className="font-light w-full">{itemDetails.overview}</p>
+                  <p className="font-light w-full shrink-0">{itemDetails.overview}</p>
                   <div className="flex gap-20 items-center mt-10">
                     {creatorsArray?.map((items) => {
                       return (
                         <div className="flex flex-col items-center">
-                          <figure className="w-[150px] h-[150px] mb-2">
+                          <figure className="w-[100px] h-[100px] mb-2">
                             <img
                               src={`http://image.tmdb.org/t/p/w500${items.profile_path}`}
                               alt={`${items.name} picture`}
@@ -247,17 +245,21 @@ const SearchDetails = () => {
               </aside>
             </div>
           </div>
-        </section>
+        </section> :
         <section className="my-20 px-10 relative">
           <div className="flex gap-10">
-            <div>
+              <div>
+                <Tooltip title="Click to visit website" arrow>
               <figure className="w-[300px] h-[500px] shrink-0">
+                <a href={personsArray.homepage} target="_blank">
                 <img
                   src={`http://image.tmdb.org/t/p/w500${personsArray.profile_path}`}
                   alt={`${personsArray.name} picture`}
                   className="w-full h-full hover:scale-105 transition-all duration-500 rounded"
-                />
-              </figure>
+                  />
+                  </a>
+                  </figure>
+                  </Tooltip>
               <div className="mt-5 flex flex-col gap-5">
                 <div className="flex gap-3 text-3xl">
                   <Tooltip title="Visit Facebook" arrow>
@@ -283,11 +285,11 @@ const SearchDetails = () => {
                 </div>
                 <div>
                   <label className="font-semibold">Known Credits</label>
-                  <p>Acting</p>
+                  <p>{personsArray.credits?.cast?.length }</p>
                 </div>
                 <div>
                   <label className="font-semibold">Gender</label>
-                  <p>Acting</p>
+                  <p>{personsArray.gender === 1 ? "Female" : "Male" }</p>
                 </div>
                 <div>
                   <label className="font-semibold">Birthday</label>
@@ -307,17 +309,17 @@ const SearchDetails = () => {
                   <label className="font-semibold">Also Known As</label>
                   <p className="flex flex-col gap-">
                     {personsArray?.also_known_as?.map((knownAs, index) => (
-                      <span key={index}>{knownAs}</span>
+                      <span key={index} className="border-b pt-2">{knownAs}</span>
                     ))}
                   </p>
                 </div>
               </div>
             </div>
 
-            <aside className="w-3/4">
-              <h1 className="text-3xl font-bold">{personsArray.name}</h1>
+            <aside className="w-3/4 h-auto overflow-hidden">
+              <a href={personsArray.homepage} target="_blank"><h1 className="text-3xl font-bold">{personsArray.name}</h1></a>
               <h2 className="mt-8 mb-4 text-xl font-semibold">Biography</h2>
-              <p className="transition-all duration-700">{`${
+              <p className="mb-5">{`${
                 personsArray.biography
                   ? seeMore
                     ? personsArray.biography
@@ -332,7 +334,7 @@ const SearchDetails = () => {
                   {seeMore ? "See Less" : "See More"}
                 </button>
               )}
-              <h2 className="mt-10 text-xl font-semibold">Known For</h2>
+              {personsArray?.credits?.cast && <h2 className="mt-10 text-xl font-semibold">Known For</h2>}
               <div className="flex gap-4 overflow-x-scroll pb-10 pr-10 h-auto">
                 {personsArray?.credits?.cast
                   ?.filter((casts) => casts.popularity > 30 && casts.poster_path)
@@ -352,15 +354,15 @@ const SearchDetails = () => {
                     );
                   })}
               </div>
-              <div>
-                <h2>Acting</h2>
+              <div className="mt-10">
+                <h2 className="text-lg font-semibold">Acting</h2>
                 <div className="shadow-lg p-5 border-2">
                   {personsArray?.credits?.cast?.map((casts) => {
                     return (
-                      <div className="border-b flex items-center py-4 gap-4" key={casts.id}>
+                      <div className="border-b flex items-center py-4 gap-4 shrink-0" key={casts.id}>
                         <p>{casts.release_date ? casts?.release_date?.substring(0, 4) : "Null" }</p>
                         <FaCircleNotch className="text-sm"/>
-                        <p className="font-semibold">{casts.title}</p> as <p>{casts.character}</p>
+                        <p className="font-semibold shrink-0">{casts.title}</p> as <p className="shrink-0">{casts.character}</p>
                       </div>
                     );
                   })}
@@ -368,10 +370,10 @@ const SearchDetails = () => {
               </div>
             </aside>
           </div>
-        </section>
+        </section>}
       </div>
 
-      <section className="flex gap-4 mt-10 pl-10 mb-10">
+     {!personsArray.name && !personsArray.place_of_birth && <section className="flex gap-4 mt-10 pl-10 mb-10">
         <div className="w-3/4">
           <h1 className="text-2xl font-bold my-2">{`${
             category === "movie" ? "Movie" : "Series"
@@ -383,11 +385,14 @@ const SearchDetails = () => {
                 return (
                   <div className="border h-auto rounded shadow-lg flex flex-col items-center">
                     <figure className="w-[150px] h-[200px]">
+                      <Link to={`/${cast.id}`}>
+                      
                       <img
                         src={`http://image.tmdb.org/t/p/w500${cast.profile_path}`}
                         alt={cast.name}
                         className="w-full h-full rounded-t"
-                      />
+                        />
+                        </Link>
                     </figure>
                     <h3 className="font-bold text-center">{cast.character}</h3>
                     <h5>{cast.original_name}</h5>
@@ -460,17 +465,17 @@ const SearchDetails = () => {
             </span>
           </div>
         </div>
-      </section>
+      </section>}
 
       {movieOrTvVideos && (
         <section className="mx-10 mb-10">
           <h1 className="text-2xl font-bold ">Media</h1>
-          <div className="flex gap-3 my-4 overflow-x-scroll h-auto py-3">
+          <div className="flex gap-5 my-4 overflow-x-scroll h-auto py-3">
             {movieOrTvVideos?.map((movies) => {
               return (
-                <div key={movies.key} className=" flex flex-col">
+                <div key={movies.key} className=" flex flex-col w-1/3">
                   <iframe
-                    width="350"
+                    width="full"
                     height="190"
                     src={`https://www.youtube.com/embed/${movies?.key}`}
                     title={`${movies.name} video clips`}
@@ -494,18 +499,21 @@ const SearchDetails = () => {
           </div>
         </section>
       )}
-      <section className="mx-10 mb-20 h-auto">
+    {!personsArray.name && !personsArray.place_of_birth &&  <section className="mx-10 mb-20 h-auto">
         <h1 className="text-2xl font-bold">Recommendations</h1>
         <div className="flex gap-5 my-4 pb-24 overflow-x-scroll ">
           {similarItems?.map((items) => {
+            
             return (
               <div className="shadow-lg">
                 <figure className="w-[200px] h-[150px]">
+                   <Link to={`/${items.id}`}>
                   <img
                     src={`http://image.tmdb.org/t/p/w500${items.poster_path}`}
                     alt={`${items.title || items.name} poster`}
                     className="w-full h-full rounded-md"
-                  />
+                    />
+                    </Link>
                   <figcaption className="text-lg ml-3">
                     {items.title || items.name}
                   </figcaption>
@@ -514,7 +522,7 @@ const SearchDetails = () => {
             );
           })}
         </div>
-      </section>
+      </section>}
     </>
   );
 };
