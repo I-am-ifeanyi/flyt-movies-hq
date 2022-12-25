@@ -12,21 +12,21 @@ const Header = () => {
     useContext(newContextAPI);
 
   return (
-    <div className="relative">
-      <div className="bg-[#1f2c3a] text-gray-100 font-bold h-10 px-10 py-8 flex items-center cursor-pointer shrink-0 opacity-90 border-b-2 relative z-50">
+    <div className="">
+      <div className="bg-[#1f2c3a] text-gray-100 font-bold h-10 px-10 py-8 flex items-center cursor-pointer opacity-90 border-b-2 relative z-10">
         <Link to="/">
           {" "}
-          <h1 className="text-xl mr-10 p-1 rounded bg-gradient-to-r flex flex-shrink-0 from-purple-500 to-pink-500">
+          <h1 className="text-xl mr-10 p-1 rounded bg-gradient-to-r flex from-purple-500 to-pink-500">
             FlyT HQ
           </h1>
         </Link>
-        <ul className="nav-links text-sm shrink-0 mr-10">
+        <ul className="nav-links text-sm mr-10">
           <Link to="/">
             <li>Home</li>
           </Link>
           <li className=" transition-all duration-1000">
             Movies
-            <ul className="nav-child-links border py-3 rounded hover:bg-[#1f2c3a]">
+            <ul className="nav-child-links border py-3 rounded hover:bg-[#1f2c3a] z-50">
               <Link to="Popular">
                 <li className="hover:bg-[#141c24] px-5 py-2 rounded-lg  hover:transition-all hover:duration-500 hover:translate-y-1">
                   Popular
@@ -79,7 +79,7 @@ const Header = () => {
             </ul>
           </li>
         </ul>
-        <div className="flex ml-auto gap-10 items-center shrink-0">
+        <div className="flex ml-auto gap-10 items-center">
           <FaPlus />
           <h1 className="border px-1 rounded font-medium text-[12px]">EN</h1>
           <IoMdNotifications />

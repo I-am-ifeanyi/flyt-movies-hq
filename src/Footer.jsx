@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="flex justify-center gap-10 shrink-0 px-28 h-80 pt-20  bg-[#1f2c3a] text-white w-full  relative bottom-0">
+    <div className="flex justify-center gap-10 overflow-hidden shrink-0 px-28 h-80 pt-20  bg-[#1f2c3a] text-white w-full  relative bottom-0">
       <div className="flex flex-col  shrink-0">
         <h1 className="text-5xl mr-10 p-1 rounded bg-gradient-to-r flex flex-shrink-0 from-purple-500 to-pink-500">
           FlyT <br />HQ

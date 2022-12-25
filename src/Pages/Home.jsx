@@ -65,7 +65,7 @@ const Home = () => {
         <HeroSection trending={trending} />
         <div>
           <div className="mt-10 px-10">
-            <div className="flex items-center">
+            <div className="flex items-center overflow-x-hidden ">
               <h1 className="text-2xl font-bold shrink-0">What's Popular</h1>
               <div className="flex items-center gap-5 shrink-0 ml-10  border border-[#1f2c3a] rounded-3xl transition-all duration-700 cursor-pointer">
                 <p
@@ -157,7 +157,7 @@ const Home = () => {
                       </p>
                     </Link>
                     {subActions === result.id && (
-                      <div className="bg-gray-100 w-32 shadow-xl flex flex-col items-center justify-center -mt-64 ml-28 relative z-40 h-40 rounded">
+                      <div className="bg-gray-100 w-32 shadow-xl flex flex-col items-center justify-center -mt-64 ml-28 absolute z-40 h-40 rounded">
                         <div className="flex w-full items-center border-b-2 py-2 hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
                           <MdOutlineList className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
                           <p className="text-sm hover:scale-105">Add to list</p>
@@ -214,50 +214,52 @@ const Home = () => {
                       className=" mt-10 relative  transition-all duration-700"
                       key={result.id}
                     >
-                    {subActions === result.id ? (
-                      <GiCancel
-                        className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
-                        onClick={() => selectItem(result.id)}
-                      />
-                    ) : (
-                      <HiOutlineDotsCircleHorizontal
-                        className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
-                        onClick={() => selectItem(result.id)}
-                      />
-                    )}
-                    <Link to={`/${result.id}`}>
-                      <figure className="h-60 w-44">
-                        <a href="#" target="_blank">
-                          <img
-                            src={`http://image.tmdb.org/t/p/w500${result.poster_path}`}
-                            alt="film poster"
-                            className="w-full h-full rounded-xl border-b-4 border-green-400 "
-                          />
-                        </a>
-                        <figcaption className="absolute border w-6 h-8 flex items-center justify-center text-gray-200 bg-gray-800 rounded-full z-40 -mt-5 ml-3 border-2 border-green-400 text-sm">
-                          {Math.round(result.vote_average)}
-                        </figcaption>
-                      </figure>
-                      <h1 className="mt-6 ml-3 font-extrabold">
-                        {result.title
-                          ? result.title
-                          : result.name
-                          ? result.name
-                          : "Title Unavailable"}
-                      </h1>
-                      <p className="ml-3 text-sm">
-                        {result.release_date
-                          ? result.release_date
-                          : result.first_air_date
-                          ? result.first_air_date
-                          : "Date unavailable"}
-                      </p>
+                      {subActions === result.id ? (
+                        <GiCancel
+                          className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
+                          onClick={() => selectItem(result.id)}
+                        />
+                      ) : (
+                        <HiOutlineDotsCircleHorizontal
+                          className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
+                          onClick={() => selectItem(result.id)}
+                        />
+                      )}
+                      <Link to={`/${result.id}`}>
+                        <figure className="h-60 w-44">
+                          <a href="#" target="_blank">
+                            <img
+                              src={`http://image.tmdb.org/t/p/w500${result.poster_path}`}
+                              alt="film poster"
+                              className="w-full h-full rounded-xl border-b-4 border-green-400 "
+                            />
+                          </a>
+                          <figcaption className="absolute border w-6 h-8 flex items-center justify-center text-gray-200 bg-gray-800 rounded-full z-40 -mt-5 ml-3 border-2 border-green-400 text-sm">
+                            {Math.round(result.vote_average)}
+                          </figcaption>
+                        </figure>
+                        <h1 className="mt-6 ml-3 font-extrabold">
+                          {result.title
+                            ? result.title
+                            : result.name
+                            ? result.name
+                            : "Title Unavailable"}
+                        </h1>
+                        <p className="ml-3 text-sm">
+                          {result.release_date
+                            ? result.release_date
+                            : result.first_air_date
+                            ? result.first_air_date
+                            : "Date unavailable"}
+                        </p>
                       </Link>
                       {subActions === result.id && (
-                        <div className="bg-gray-100 w-32 shadow-xl flex flex-col items-center justify-center -mt-64 ml-28 relative z-40 h-40 rounded">
+                        <div className="bg-gray-100 w-32 shadow-xl flex flex-col items-center justify-center -mt-64 ml-28 absolute z-40 h-40 rounded">
                           <div className="flex w-full items-center border-b-2 py-2 hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
                             <MdOutlineList className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
-                            <p className="text-sm hover:scale-105">Add to list</p>
+                            <p className="text-sm hover:scale-105">
+                              Add to list
+                            </p>
                           </div>
                           <div className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
                             <BsFillSuitHeartFill className="mr-3 ml-4 hover:scale-105" />{" "}
@@ -269,7 +271,9 @@ const Home = () => {
                           </div>
                           <div className="flex w-full items-center py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
                             <MdStarRate className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
-                            <p className="text-sm hover:scale-105">Your Rating</p>
+                            <p className="text-sm hover:scale-105">
+                              Your Rating
+                            </p>
                           </div>
                         </div>
                       )}
@@ -390,51 +394,51 @@ const Home = () => {
                     className="pt-5 relative  transition-all duration-700 "
                     key={result.id}
                   >
-                  {subActions === result.id ? (
-                    <GiCancel
-                      className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
-                      onClick={() => selectItem(result.id)}
-                    />
-                  ) : (
-                    <HiOutlineDotsCircleHorizontal
-                      className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
-                      onClick={() => selectItem(result.id)}
-                    />
-                  )}
-                  <Link to={`/${result.id}`}>
-                    <figure className="h-60 w-44">
-                      <a href="#" target="_blank">
-                        <img
-                          src={`http://image.tmdb.org/t/p/w500${
-                            result.poster_path || result.profile_path
-                          }`}
-                          alt={result.title || result.name}
-                          className="w-full h-full rounded-xl border-b-4 border-green-400 "
-                        />
-                      </a>
-                      <figcaption className="absolute border w-6 h-8 flex items-center justify-center text-gray-200 bg-gray-800 rounded-full z-40 -mt-5 ml-3 border-2 border-green-400 text-sm">
-                        {Math.round(result.vote_average) ||
-                          Math.round(result.popularity)}
-                      </figcaption>
-                    </figure>
-                    
-                    <h1 className="mt-6 ml-3 font-extrabold tracking-wider pl-2 rounded">
-                      {result.title
-                        ? result.title
-                        : result.name
-                        ? result.name
-                        : "Title Unavailable"}
-                    </h1>
-                    <p className="ml-3 text-sm pl-2">
-                      {result.release_date
-                        ? result.release_date
-                        : result.first_air_date
-                        ? result.first_air_date
-                        : null}
-                    </p>
+                    {subActions === result.id ? (
+                      <GiCancel
+                        className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
+                        onClick={() => selectItem(result.id)}
+                      />
+                    ) : (
+                      <HiOutlineDotsCircleHorizontal
+                        className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
+                        onClick={() => selectItem(result.id)}
+                      />
+                    )}
+                    <Link to={`/${result.id}`}>
+                      <figure className="h-60 w-44">
+                        <a href="#" target="_blank">
+                          <img
+                            src={`http://image.tmdb.org/t/p/w500${
+                              result.poster_path || result.profile_path
+                            }`}
+                            alt={result.title || result.name}
+                            className="w-full h-full rounded-xl border-b-4 border-green-400 "
+                          />
+                        </a>
+                        <figcaption className="absolute border w-6 h-8 flex items-center justify-center text-gray-200 bg-gray-800 rounded-full z-40 -mt-5 ml-3 border-2 border-green-400 text-sm">
+                          {Math.round(result.vote_average) ||
+                            Math.round(result.popularity)}
+                        </figcaption>
+                      </figure>
+
+                      <h1 className="mt-6 ml-3 font-extrabold tracking-wider pl-2 rounded">
+                        {result.title
+                          ? result.title
+                          : result.name
+                          ? result.name
+                          : "Title Unavailable"}
+                      </h1>
+                      <p className="ml-3 text-sm pl-2">
+                        {result.release_date
+                          ? result.release_date
+                          : result.first_air_date
+                          ? result.first_air_date
+                          : null}
+                      </p>
                     </Link>
                     {subActions === result.id && (
-                      <div className="bg-gray-100 w-32 shadow-xl flex flex-col items-center justify-center -mt-64 ml-28 relative z-40 h-40 rounded">
+                      <div className="bg-gray-100 w-32 shadow-xl flex flex-col items-center justify-center -mt-64 ml-28 absolute z-40 h-40 rounded">
                         <div className="flex w-full items-center border-b-2 py-2 hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
                           <MdOutlineList className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
                           <p className="text-sm hover:scale-105">Add to list</p>
