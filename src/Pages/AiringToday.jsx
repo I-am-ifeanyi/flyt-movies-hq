@@ -70,12 +70,9 @@ const AiringToday = () => {
     setSubActions,
     selectItem,
   ] = Categories();
-  //https://api.themoviedb.org/3/tv/airing_today?api_key=711b673e8a9d9a73798bfbd7f7e018b7&language=en-US&page=1
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/tv/airing_today?api_key=711b673e8a9d9a73798bfbd7f7e018b7&language=en-US&page=${popularPage}`
-    )
+    fetch(`https://api.themoviedb.org/3/tv/airing_today?api_key=711b673e8a9d9a73798bfbd7f7e018b7&language=en-US&page=${popularPage}`)
       .then((res) => res.json())
       .then((data) => setPopularArray(data.results))
       .catch((error) => console.log(error));
@@ -92,6 +89,7 @@ const AiringToday = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [popularPage]);
+  console.log(popularArray)
 
   return (
     <>
@@ -480,7 +478,7 @@ const AiringToday = () => {
             <div className="flex mb-20 gap-4 flex-wrap relative">
               {popularArray &&
                 popularArray
-                  .filter((result) => result.poster_path && result.title)
+                  .filter((result) => result.poster_path && (result.title || result.name))
                   .map((result) => {
                     return (
                       <div
