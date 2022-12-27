@@ -104,6 +104,10 @@ const SearchDetails = () => {
   };
   console.log(personsArray);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, [category, searchDetails]);
+
   return (
     <>
       <div className="relative">
@@ -252,7 +256,7 @@ const SearchDetails = () => {
           <section className="my-20 px-10 relative">
             <div className="flex gap-10">
               <div>
-                <Tooltip title="Click to visit website" arrow>
+                <Tooltip title={personsArray.homepage ? personsArray.homepage : "Website is Unavailable"} arrow>
                   <figure className="w-[300px] h-[500px] shrink-0">
                     <a href={personsArray.homepage} target="_blank">
                       <img

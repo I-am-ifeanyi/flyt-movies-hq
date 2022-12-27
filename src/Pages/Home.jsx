@@ -50,7 +50,6 @@ const Home = () => {
     selectedMovieCategory,
   ] = Categories();
 
-  // console.log(weeklyTrends)
 
   return (
     <>
@@ -130,14 +129,12 @@ const Home = () => {
                     )}
                     <Link to={`/${result.id}`}>
                       <figure className="h-60 w-44">
-                        <a href="#" target="_blank">
                           <img
                             src={`http://image.tmdb.org/t/p/w500${result.poster_path}`}
                             alt={result.title || result.name}
                             className="w-full h-full rounded-xl border-b-4 border-green-400 hover:scale-105 transition-all duration-500 "
                           />
-                        </a>
-                        <figcaption className="absolute border w-6 h-8 flex items-center justify-center text-gray-200 bg-gray-800 rounded-full z-40 -mt-5 ml-3 border-2 border-green-400 text-sm">
+                        <figcaption className="absolute w-6 h-8 flex items-center justify-center text-gray-200 bg-gray-800 rounded-full z-40 -mt-5 ml-3 border-2 border-green-400 text-sm">
                           {Math.round(result.vote_average)}
                         </figcaption>
                       </figure>
@@ -227,13 +224,11 @@ const Home = () => {
                       )}
                       <Link to={`/${result.id}`}>
                         <figure className="h-60 w-44">
-                          <a href="#" target="_blank">
                             <img
                               src={`http://image.tmdb.org/t/p/w500${result.poster_path}`}
                               alt="film poster"
                               className="w-full h-full rounded-xl border-b-4 border-green-400 "
                             />
-                          </a>
                           <figcaption className="absolute border w-6 h-8 flex items-center justify-center text-gray-200 bg-gray-800 rounded-full z-40 -mt-5 ml-3 border-2 border-green-400 text-sm">
                             {Math.round(result.vote_average)}
                           </figcaption>
@@ -407,7 +402,6 @@ const Home = () => {
                     )}
                     <Link to={`/${result.id}`}>
                       <figure className="h-60 w-44">
-                        <a href="#" target="_blank">
                           <img
                             src={`http://image.tmdb.org/t/p/w500${
                               result.poster_path || result.profile_path
@@ -415,7 +409,6 @@ const Home = () => {
                             alt={result.title || result.name}
                             className="w-full h-full rounded-xl border-b-4 border-green-400 "
                           />
-                        </a>
                         <figcaption className="absolute border w-6 h-8 flex items-center justify-center text-gray-200 bg-gray-800 rounded-full z-40 -mt-5 ml-3 border-2 border-green-400 text-sm">
                           {Math.round(result.vote_average) ||
                             Math.round(result.popularity)}
