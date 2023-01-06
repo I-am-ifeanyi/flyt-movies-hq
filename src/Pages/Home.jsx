@@ -50,22 +50,41 @@ const Home = () => {
     selectedMovieCategory,
   ] = Categories();
 
+  const [favorites, setFavorites] = useState([]);
+
+  // const toggleIsFavorite = (num) => {
+  //   if (subActions === num) {
+  //     setIsFavorite(prev => !prev)
+  //   } else return
+
+  // }
+
+  const addToFavorites = (favID) => {
+    if (!favorites.some((item) => item === favID)) {
+      setFavorites([...favorites, favID]);
+    } else {
+      const index = favorites.indexOf(favID)
+      favorites.splice(index, 1)
+    }
+  };
+
+  const removeFromFavorites = (favID) => {
+    if (favorites.some((item) => item === favID)) {
+      const index = favorites.indexOf(favID);
+      favorites.splice(index, 1);
+    } else return;
+  };
+
+  console.log(favorites);
 
   return (
     <>
-      <div
-        className="mb-72"
-        onClick={() => {
-          if (subActions > 0) {
-            setSubActions(0);
-          } else return null;
-        }}
-      >
+      <div className="mb-20">
         <HeroSection trending={trending} />
         <div>
           <div className="mt-10 px-10">
             <div className="flex items-center overflow-x-hidden ">
-              <h1 className="text-2xl font-bold shrink-0">What's Popular</h1>
+             <Link to="favs"> <h1 className="text-2xl font-bold shrink-0">What's Popular</h1></Link>
               <div className="flex items-center gap-5 shrink-0 ml-10  border border-[#1f2c3a] rounded-3xl transition-all duration-700 cursor-pointer">
                 <p
                   className={`${
@@ -129,11 +148,11 @@ const Home = () => {
                     )}
                     <Link to={`/${result.id}`}>
                       <figure className="h-60 w-44">
-                          <img
-                            src={`http://image.tmdb.org/t/p/w500${result.poster_path}`}
-                            alt={result.title || result.name}
-                            className="w-full h-full rounded-xl border-b-4 border-green-400 hover:scale-105 transition-all duration-500 "
-                          />
+                        <img
+                          src={`http://image.tmdb.org/t/p/w500${result.poster_path}`}
+                          alt={result.title || result.name}
+                          className="w-full h-full rounded-xl border-b-4 border-green-400 hover:scale-105 transition-all duration-500 "
+                        />
                         <figcaption className="absolute w-6 h-8 flex items-center justify-center text-gray-200 bg-gray-800 rounded-full z-40 -mt-5 ml-3 border-2 border-green-400 text-sm">
                           {Math.round(result.vote_average)}
                         </figcaption>
@@ -154,20 +173,53 @@ const Home = () => {
                       </p>
                     </Link>
                     {subActions === result.id && (
-                      <div className="bg-gray-100 w-32 shadow-xl flex flex-col items-center justify-center -mt-64 ml-28 absolute z-40 h-40 rounded">
-                        <div className="flex w-full items-center border-b-2 py-2 hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
+                      <div className="bg-gray-100 w-32 shadow-xl flex flex-col items-center justify-center -mt-64 ml-28 absolute z-40 h-40 rounded cursor-pointer">
+                        <div
+                          className="flex w-full items-center border-b-2 py-2 hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 "
+                          onClick={() =>
+                            alert(
+                              "This feature is currently not implemented, please check other features."
+                            )
+                          }
+                        >
                           <MdOutlineList className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
                           <p className="text-sm hover:scale-105">Add to list</p>
                         </div>
-                        <div className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
-                          <BsFillSuitHeartFill className="mr-3 ml-4 hover:scale-105" />{" "}
+                        <div
+                          className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 "
+                          onClick={() => {
+                            addToFavorites(result.id);
+                            alert("Hello");
+                          }}
+                        >
+                          <BsFillSuitHeartFill
+                            className={`mr-3 ml-4 hover:scale-105 ${
+                              favorites.includes(result.id)
+                                ? "text-pink-600"
+                                : null
+                            }`}
+                          />{" "}
                           <p className="text-sm hover:scale-105">Favorite</p>
                         </div>
-                        <div className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
+                        <div
+                          className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 "
+                          onClick={() =>
+                            alert(
+                              "This feature is currently not implemented, please check other features."
+                            )
+                          }
+                        >
                           <BsFillBookmarkPlusFill className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
                           <p className="text-sm hover:scale-105">Watchlist</p>
                         </div>
-                        <div className="flex w-full items-center py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
+                        <div
+                          onClick={() =>
+                            alert(
+                              "This feature is currently not implemented, please check other features."
+                            )
+                          }
+                          className="flex w-full items-center py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 "
+                        >
                           <MdStarRate className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
                           <p className="text-sm hover:scale-105">Your Rating</p>
                         </div>
@@ -224,11 +276,11 @@ const Home = () => {
                       )}
                       <Link to={`/${result.id}`}>
                         <figure className="h-60 w-44">
-                            <img
-                              src={`http://image.tmdb.org/t/p/w500${result.poster_path}`}
-                              alt="film poster"
-                              className="w-full h-full rounded-xl border-b-4 border-green-400 "
-                            />
+                          <img
+                            src={`http://image.tmdb.org/t/p/w500${result.poster_path}`}
+                            alt="film poster"
+                            className="w-full h-full rounded-xl border-b-4 border-green-400 "
+                          />
                           <figcaption className="absolute border w-6 h-8 flex items-center justify-center text-gray-200 bg-gray-800 rounded-full z-40 -mt-5 ml-3 border-2 border-green-400 text-sm">
                             {Math.round(result.vote_average)}
                           </figcaption>
@@ -402,13 +454,13 @@ const Home = () => {
                     )}
                     <Link to={`/${result.id}`}>
                       <figure className="h-60 w-44">
-                          <img
-                            src={`http://image.tmdb.org/t/p/w500${
-                              result.poster_path || result.profile_path
-                            }`}
-                            alt={result.title || result.name}
-                            className="w-full h-full rounded-xl border-b-4 border-green-400 "
-                          />
+                        <img
+                          src={`http://image.tmdb.org/t/p/w500${
+                            result.poster_path || result.profile_path
+                          }`}
+                          alt={result.title || result.name}
+                          className="w-full h-full rounded-xl border-b-4 border-green-400 "
+                        />
                         <figcaption className="absolute border w-6 h-8 flex items-center justify-center text-gray-200 bg-gray-800 rounded-full z-40 -mt-5 ml-3 border-2 border-green-400 text-sm">
                           {Math.round(result.vote_average) ||
                             Math.round(result.popularity)}

@@ -20,14 +20,14 @@ const PopularPeople = () => {
   return (
     <div className="p-10">
       <h1 className="font-semibold text-2xl">Popular People</h1>
-      <div className="mt-10 flex flex-wrap justify-between gap-3 w-full">
+      <div className="mt-10 flex flex-wrap justify-between w-full">
         {popularPeopleArray &&
           popularPeopleArray
             .filter((result) => result.profile_path)
             .map((result) => {
               return (
                 <div
-                  className="w-1/5 border shadow-lg bg-white rounded-lg pb-3"
+                  className="w-1/5 border shadow-lg bg-white rounded-lg pb-3 mb-5 mr-2"
                   key={result.id}
                 >
                    <Link to={`/${result.id}`}>

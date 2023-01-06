@@ -23,6 +23,8 @@ const Categories = () => {
   const [subActions, setSubActions] = useState(0);
   const [isClicked4, setIsClicked4] = useState(true);
   const [isClicked5, setIsClicked5] = useState(false);
+  
+
 
 
 
@@ -221,6 +223,8 @@ const Categories = () => {
     selectedMovieCategory = tvShows;
   } else return selectedMovieCategory;
 
+
+
   
 
   return [
@@ -262,8 +266,7 @@ const Categories = () => {
     toggleBg5,
     selectedCategory,
     selectedMovieCategory,
-    APIKEY
-
+    APIKEY,
   ];
 };
 

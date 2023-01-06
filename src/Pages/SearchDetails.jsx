@@ -133,7 +133,7 @@ const SearchDetails = () => {
         </ul>
 
         {!personsArray.gender && !personsArray.profile_path ? (
-          <section className="border-4 h-screen border-[#1f2c3a] relative">
+          <section className="border-4 h-[600px] border-[#1f2c3a] relative">
             <div className="h-full w-full absolute" style={style}>
               <div className="flex gap-10 justify-center items-center h-full px-10">
                 <figure
@@ -174,7 +174,7 @@ const SearchDetails = () => {
                 <aside className="z-50 flex flex-col gap-5 px-10  text-gray-100 font-bold max-h-screen  bg-black/30 py-10 tracking-wider ">
                   <div className="">
                     <div className="flex gap-1 items-center text-3xl ">
-                      <h1 className="shrink-0">
+                      <h1 className="">
                         {itemDetails.title || itemDetails.name}
                       </h1>
                       <p>({year})</p>
