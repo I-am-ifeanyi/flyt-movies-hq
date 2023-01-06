@@ -189,7 +189,6 @@ const Home = () => {
                           className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 "
                           onClick={() => {
                             addToFavorites(result.id);
-                            alert("Hello");
                           }}
                         >
                           <BsFillSuitHeartFill
