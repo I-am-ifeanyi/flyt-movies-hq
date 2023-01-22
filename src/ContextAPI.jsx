@@ -9,6 +9,7 @@ const ContextAPI = ({ children }) => {
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isFetchNotFound, setIsFetchNotFound] = useState("")
+  const [showNavLinks, setShowNavLinks] = useState(false)
   const focusPoint = useRef();
 
   const searchSubmit = (e) => {
@@ -42,6 +43,7 @@ const ContextAPI = ({ children }) => {
   const focusOnSearch = () => {
     focusPoint.current.style.border = "2px dotted gray";
     focusPoint.current.focus();
+    toggleNavLinks;
 
   };
 
@@ -56,6 +58,10 @@ const ContextAPI = ({ children }) => {
   const switchOffDisplay = () => {
     setDisplaySearch(false);
   };
+
+  const toggleNavLinks = () => {
+    setShowNavLinks(prev => !prev)
+  }
   return (
     <newContextAPI.Provider
       value={{
@@ -69,7 +75,9 @@ const ContextAPI = ({ children }) => {
         focusPoint,
         focusOnSearch,
         isLoading,
-        isFetchNotFound
+        isFetchNotFound,
+        showNavLinks,
+        toggleNavLinks,
       }}
     >
       {children}

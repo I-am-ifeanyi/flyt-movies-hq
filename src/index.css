@@ -12,12 +12,6 @@ body {
   
 }
 
-.nav-links {
-  display: flex;
-  gap: 40px;
-  position: relative;
-}
-
 .nav-child-links {
   display: none;
   color: red;

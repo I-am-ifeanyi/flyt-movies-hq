@@ -15,7 +15,7 @@ import SearchDetails from "./Pages/SearchDetails";
 
 const App = () => {
   return (
-    <div className="flex flex-col min-h-[100vh] relative bg-gray-100">
+    <div className="flex flex-col min-h-[100vh] relative bg-gray-100 overflow-hidden">
       <Header />
       <Routes>
         <Route index element={<Home />} />
