@@ -31,6 +31,11 @@ const GeneralSearchResults = () => {
     }
   }, [toggleDisplaySearch]);
 
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <div className="">
       <Search />
@@ -38,9 +43,9 @@ const GeneralSearchResults = () => {
       <h1 className="text-center mt-10 ">
         {movieSearch.length < 1 ? isFetchNotFound : null}
       </h1>
-      <div className="flex gap-5 w-full p-5 justify-between">
+      <div className="flex flex-col md:flex-row items-center md:items-start gap-5 w-full p-5 justify-between">
         {movieSearch.length > 0 && (
-          <div className="border rounded-xl w-auto max-h-[28rem]">
+          <div className="border rounded-xl w-full md:w-auto max-h-[28rem]">
             <h1 className="p-4 w-full bg-[#1f2c3a] rounded-t-xl text-white font-bold text-xl">
               Search Results
             </h1>
@@ -90,7 +95,7 @@ const GeneralSearchResults = () => {
             </div>
           </div>
         )}
-        <div className="flex flex-col gap-10 pr-10 mr-20  relative w-[95%] mb-28">
+        <div className="flex flex-col gap-10 md:pr-10 md:mr-20 relative w-full md:w-[95%] mb-28">
           {movieSearch
             .filter(
               (movie) => movie.poster_path || (movie.known_for && movie.id)
@@ -98,10 +103,10 @@ const GeneralSearchResults = () => {
             .map((movie) => {
               return (
                 <div
-                  className="flex items-center gap-10 ml-20 shrink-0 w-full hover:bg-black/5 transition-all duration-750 border-[#1f2c3a] shadow-xl "
+                  className="flex items-center gap-10 md:ml-20 shrink-0 w-full hover:bg-black/5 transition-all duration-750 border-[#1f2c3a] shadow-xl "
                   key={movie.id}
                 >
-                  <div className="border w-[200px] h-[200px] bg-slate-400 p-1 rounded shrink-0">
+                  <div className="border md:w-[200px] md:h-[200px] w-[150px] h-[200px] bg-slate-400 p-1 rounded shrink-0">
                     <Link to={`/${movie.id}`}>
                       <img
                         src={`http://image.tmdb.org/t/p/w500${
@@ -118,8 +123,8 @@ const GeneralSearchResults = () => {
                       />
                     </Link>
                   </div>
-                  <div className="py-5 flex flex-col justify-around pr-5 h-[200px]  hover:scale-105 transition-all duration-300">
-                    <h1 className="text-xl font-bold ">
+                  <div className="md:py-5 py-3 flex flex-col justify-around md:pr-5 pr-2 h-[200px]  md:hover:scale-105 transition-all duration-300">
+                    <h1 className="md:text-xl font-bold ">
                       {movie.poster_path && movie.title
                         ? movie.title
                         : movie.poster_path
@@ -131,7 +136,7 @@ const GeneralSearchResults = () => {
                         movie.first_air_date ||
                         movie.known_for_department}
                     </p>
-                    <p className="overflow-hidden">
+                    <p className="overflow-scroll">
                       {movie.overview
                         ? movie.overview.split("\n")
                         : movie.known_for

@@ -7,6 +7,7 @@ import { MdStarRate, MdOutlineList } from "react-icons/md";
 import { BsFillBookmarkPlusFill, BsFillSuitHeartFill } from "react-icons/bs";
 import { HiOutlineDotsCircleHorizontal } from "react-icons/hi";
 import { GiCancel } from "react-icons/gi";
+import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai";
 
 const Home = () => {
   const [
@@ -51,20 +52,18 @@ const Home = () => {
   ] = Categories();
 
   const [favorites, setFavorites] = useState([]);
+  const [showWhatsPopular, setShowWhatsPopular] = useState(false)
 
-  // const toggleIsFavorite = (num) => {
-  //   if (subActions === num) {
-  //     setIsFavorite(prev => !prev)
-  //   } else return
-
-  // }
+  const toggleWhatsPopular = () => {
+   setShowWhatsPopular(prev => !prev)
+ }
 
   const addToFavorites = (favID) => {
     if (!favorites.some((item) => item === favID)) {
       setFavorites([...favorites, favID]);
     } else {
-      const index = favorites.indexOf(favID)
-      favorites.splice(index, 1)
+      const index = favorites.indexOf(favID);
+      favorites.splice(index, 1);
     }
   };
 
@@ -75,21 +74,43 @@ const Home = () => {
     } else return;
   };
 
-  console.log(favorites);
+  // useEffect(() => {
+  //   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  // }, []);
 
   return (
     <>
       <div className="mb-20">
         <HeroSection trending={trending} />
         <div>
-          <div className="mt-10 px-10">
-            <div className="flex items-center overflow-x-hidden ">
-             <Link to="favs"> <h1 className="text-2xl font-bold shrink-0">What's Popular</h1></Link>
-              <div className="flex items-center gap-5 shrink-0 ml-10  border border-[#1f2c3a] rounded-3xl transition-all duration-700 cursor-pointer">
+          <div className="mt-10 md:px-10 px-5">
+            <div className="flex items-center justify-between md:justify-start overflow-x-hidden ">
+              {" "}
+              <h1 className="md:text-2xl text-xl font-bold shrink-0 flex items-center gap-4">
+                What's Popular{" "}
+                {showWhatsPopular ? (
+                  <AiFillCaretRight
+                    size={30}
+                    className="md:hidden"
+                    onClick={toggleWhatsPopular}
+                  />
+                ) : (
+                  <AiFillCaretDown
+                    size={30}
+                    className="md:hidden"
+                    onClick={toggleWhatsPopular}
+                  />
+                )}
+              </h1>
+              <div
+                className={`${
+                  showWhatsPopular ? "flex" : "hidden"
+                } md:flex md:flex-row flex-col items-center md:gap-5 md:shrink-0 ml-10  border md:border-[#1f2c3a] md:rounded-3xl transition-all duration-700 cursor-pointer`}
+              >
                 <p
                   className={`${
                     isClicked ? "bg-[#1f2c3a]" : null
-                  } px-5 p-1 rounded-3xl font-bold tracking-wide transition-all duration-700 ${
+                  } px-5 p-1 md:rounded-3xl w-full md:w-auto text-center font-bold tracking-wide transition-all duration-700 ${
                     isClicked ? "text-gray-100" : "text-[#1f2c3a]"
                   }`}
                   onClick={toggleBg}
@@ -99,7 +120,7 @@ const Home = () => {
                 <p
                   className={`${
                     isClicked1 ? "bg-[#1f2c3a]" : null
-                  } px-5 p-1 rounded-3xl font-bold tracking-wide transition-all duration-700 ${
+                  } px-5 p-1 md:rounded-3xl w-full md:w-auto text-center font-bold tracking-wide transition-all duration-700 ${
                     isClicked1 ? "text-gray-100" : "text-[#1f2c3a]"
                   }`}
                   onClick={toggleBg1}
@@ -109,7 +130,7 @@ const Home = () => {
                 <p
                   className={`${
                     isClicked2 ? "bg-[#1f2c3a]" : null
-                  } px-5 p-1 rounded-3xl font-bold tracking-wide transition-all duration-700 ${
+                  } px-5 p-1 md:rounded-3xl w-full md:w-auto text-center font-bold tracking-wide transition-all duration-700 ${
                     isClicked2 ? "text-gray-100" : "text-[#1f2c3a]"
                   }`}
                   onClick={toggleBg2}
@@ -119,7 +140,7 @@ const Home = () => {
                 <p
                   className={`${
                     isClicked3 ? "bg-[#1f2c3a]" : null
-                  } px-5 p-1 rounded-3xl font-bold tracking-wider transition-all duration-700 ${
+                  } px-5 p-1 md:rounded-3xl font-bold tracking-wider transition-all duration-700 ${
                     isClicked3 ? "text-gray-100" : "text-[#1f2c3a]"
                   }`}
                   onClick={toggleBg3}
@@ -128,7 +149,7 @@ const Home = () => {
                 </p>
               </div>
             </div>
-            <div className="flex mb-20 gap-4 overflow-x-scroll h-[420px] relative">
+            <div className="flex mb-20 gap-4 overflow-x-scroll md:h-[420px] relative">
               {selectedCategory.map((result) => {
                 return (
                   <div
@@ -137,17 +158,17 @@ const Home = () => {
                   >
                     {subActions === result.id ? (
                       <GiCancel
-                        className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
+                        className="absolute bg-gray-100 rounded-full md:ml-36 md:mt-3 z-50 md:text-2xl hover:bg-gray-400 text-3xl m-3"
                         onClick={() => selectItem(result.id)}
                       />
                     ) : (
                       <HiOutlineDotsCircleHorizontal
-                        className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
+                        className="absolute bg-gray-100 rounded-full md:ml-36 md:mt-3 z-50 md:text-2xl text-2xl hover:bg-gray-400 m-2"
                         onClick={() => selectItem(result.id)}
                       />
                     )}
                     <Link to={`/${result.id}`}>
-                      <figure className="h-60 w-44">
+                      <figure className="md:h-60 md:w-44 h-36 w-24">
                         <img
                           src={`http://image.tmdb.org/t/p/w500${result.poster_path}`}
                           alt={result.title || result.name}
@@ -157,14 +178,14 @@ const Home = () => {
                           {Math.round(result.vote_average)}
                         </figcaption>
                       </figure>
-                      <h1 className="mt-6 ml-3 font-extrabold">
+                      <h1 className="mt-6 ml-3 md:font-extrabold font-semibold text-sm ">
                         {result.title
                           ? result.title
                           : result.name
                           ? result.name
                           : "Title Unavailable"}
                       </h1>
-                      <p className="ml-3 text-sm">
+                      <p className="ml-3 md:text-sm text-xs">
                         {result.release_date
                           ? result.release_date
                           : result.first_air_date
@@ -173,16 +194,16 @@ const Home = () => {
                       </p>
                     </Link>
                     {subActions === result.id && (
-                      <div className="bg-gray-100 w-32 shadow-xl flex flex-col items-center justify-center -mt-64 ml-28 absolute z-40 h-40 rounded cursor-pointer">
+                      <div className="bg-gray-100 md:w-32 shadow-xl flex flex-col items-center justify-center md:-mt-64 md:ml-28 absolute z-40 h-40 rounded cursor-pointer -mt-36">
                         <div
-                          className="flex w-full items-center border-b-2 py-2 hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 "
+                          className="flex md:w-full items-center border-b-2 py-2 hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 w-[120px] "
                           onClick={() =>
                             alert(
                               "This feature is currently not implemented, please check other features."
                             )
                           }
                         >
-                          <MdOutlineList className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                          <MdOutlineList className="md:ml-3 ml-1 mr-3 text-xl hover:scale-105" />{" "}
                           <p className="text-sm hover:scale-105">Add to list</p>
                         </div>
                         <div
@@ -192,7 +213,7 @@ const Home = () => {
                           }}
                         >
                           <BsFillSuitHeartFill
-                            className={`mr-3 ml-4 hover:scale-105 ${
+                            className={`md:ml-3 ml-1 mr-3 hover:scale-105 ${
                               favorites.includes(result.id)
                                 ? "text-pink-600"
                                 : null
@@ -208,7 +229,7 @@ const Home = () => {
                             )
                           }
                         >
-                          <BsFillBookmarkPlusFill className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                          <BsFillBookmarkPlusFill className="md:ml-3 ml-1 mr-3 text-xl hover:scale-105" />{" "}
                           <p className="text-sm hover:scale-105">Watchlist</p>
                         </div>
                         <div
@@ -219,7 +240,7 @@ const Home = () => {
                           }
                           className="flex w-full items-center py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 "
                         >
-                          <MdStarRate className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                          <MdStarRate className="md:ml-3 ml-1 md:mr-3 mr-2 text-xl hover:scale-105" />{" "}
                           <p className="text-sm hover:scale-105">Your Rating</p>
                         </div>
                       </div>
@@ -230,8 +251,10 @@ const Home = () => {
             </div>
 
             <div>
-              <div className="flex gap-10">
-                <h1 className="text-2xl font-bold shrink-0 ">Free to watch</h1>
+              <div className="flex gap-10 justify-between md:justify-start">
+                <h1 className="md:text-2xl text-xl font-bold shrink-0 ">
+                  Free to watch
+                </h1>
                 <div className="flex items-center gap-5 font-bold border border-[#1f2c3a] rounded-3xl  cursor-pointer">
                   <p
                     className={`${
@@ -264,17 +287,17 @@ const Home = () => {
                     >
                       {subActions === result.id ? (
                         <GiCancel
-                          className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
+                          className="absolute bg-gray-100 rounded-full md:ml-36 md:mt-3 z-50 md:text-2xl hover:bg-gray-400 text-3xl m-3"
                           onClick={() => selectItem(result.id)}
                         />
                       ) : (
                         <HiOutlineDotsCircleHorizontal
-                          className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
+                          className="absolute bg-gray-100 rounded-full md:ml-36 md:mt-3 z-50 md:text-2xl text-2xl hover:bg-gray-400 m-2"
                           onClick={() => selectItem(result.id)}
                         />
                       )}
                       <Link to={`/${result.id}`}>
-                        <figure className="h-60 w-44">
+                        <figure className="md:h-60 md:w-44 h-36 w-24">
                           <img
                             src={`http://image.tmdb.org/t/p/w500${result.poster_path}`}
                             alt="film poster"
@@ -284,14 +307,14 @@ const Home = () => {
                             {Math.round(result.vote_average)}
                           </figcaption>
                         </figure>
-                        <h1 className="mt-6 ml-3 font-extrabold">
+                        <h1 className="mt-6 ml-3 md:font-extrabold font-semibold text-sm">
                           {result.title
                             ? result.title
                             : result.name
                             ? result.name
                             : "Title Unavailable"}
                         </h1>
-                        <p className="ml-3 text-sm">
+                        <p className="ml-3 md:text-sm text-xs">
                           {result.release_date
                             ? result.release_date
                             : result.first_air_date
@@ -300,23 +323,55 @@ const Home = () => {
                         </p>
                       </Link>
                       {subActions === result.id && (
-                        <div className="bg-gray-100 w-32 shadow-xl flex flex-col items-center justify-center -mt-64 ml-28 absolute z-40 h-40 rounded">
-                          <div className="flex w-full items-center border-b-2 py-2 hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
-                            <MdOutlineList className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                        <div className="bg-gray-100 md:w-32 shadow-xl flex flex-col items-center justify-center md:-mt-64 md:ml-28 absolute z-40 h-40 rounded cursor-pointer -mt-36">
+                          <div
+                            className="flex w-full items-center border-b-2 py-2 hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 "
+                            onClick={() =>
+                              alert(
+                                "This feature is currently not implemented, please check other features."
+                              )
+                            }
+                          >
+                            <MdOutlineList className="md:ml-3 ml-1 mr-3 text-xl hover:scale-105" />{" "}
                             <p className="text-sm hover:scale-105">
                               Add to list
                             </p>
                           </div>
-                          <div className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
-                            <BsFillSuitHeartFill className="mr-3 ml-4 hover:scale-105" />{" "}
+                          <div
+                            className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 "
+                            onClick={() => {
+                              addToFavorites(result.id);
+                            }}
+                          >
+                            <BsFillSuitHeartFill
+                              className={`md:ml-3 ml-1 mr-3 hover:scale-105 ${
+                                favorites.includes(result.id)
+                                  ? "text-pink-600"
+                                  : null
+                              }`}
+                            />{" "}
                             <p className="text-sm hover:scale-105">Favorite</p>
                           </div>
-                          <div className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
-                            <BsFillBookmarkPlusFill className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                          <div
+                            className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 "
+                            onClick={() =>
+                              alert(
+                                "This feature is currently not implemented, please check other features."
+                              )
+                            }
+                          >
+                            <BsFillBookmarkPlusFill className="md:ml-3 ml-1 mr-3 text-xl hover:scale-105" />{" "}
                             <p className="text-sm hover:scale-105">Watchlist</p>
                           </div>
-                          <div className="flex w-full items-center py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
-                            <MdStarRate className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                          <div
+                            onClick={() =>
+                              alert(
+                                "This feature is currently not implemented, please check other features."
+                              )
+                            }
+                            className="flex w-full items-center py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 "
+                          >
+                            <MdStarRate className="md:ml-3 ml-1 md:mr-3 mr-2 text-xl hover:scale-105" />{" "}
                             <p className="text-sm hover:scale-105">
                               Your Rating
                             </p>
@@ -393,13 +448,15 @@ const Home = () => {
           </div>
         </div>
         <div className="">
-          <div className="flex items-center px-10 mb-2">
-            <h1 className="text-2xl font-bold shrink-0">Trending this week</h1>
-            <div className="flex items-center gap-5 shrink-0 ml-10  border border-[#1f2c3a] rounded-3xl transition-all duration-700 cursor-pointer">
+          <div className="flex items-center justify-between md:justify-start md:px-10 px-5 mb-2">
+            <h1 className="md:text-2xl text-xl font-bold shrink-0">
+              Trending this week
+            </h1>
+            <div className="flex md:flex-row flex-col items-center md:gap-5 md:shrink-0 ml-10  border md:border-[#1f2c3a] md:rounded-3xl transition-all duration-700 cursor-pointer">
               <p
                 className={`${
                   isTrendThisWeek ? "bg-[#1f2c3a]" : null
-                } px-5 p-1 rounded-3xl font-bold tracking-wide transition-all duration-700 ${
+                } px-5 p-1 md:rounded-3xl w-full md:w-auto text-center font-bold tracking-wide transition-all duration-700 ${
                   isTrendThisWeek ? "text-gray-100" : "text-[#1f2c3a]"
                 }`}
                 onClick={toggleTrendWeek}
@@ -409,7 +466,7 @@ const Home = () => {
               <p
                 className={`${
                   isTrendThisWeek1 ? "bg-[#1f2c3a]" : null
-                } px-5 p-1 rounded-3xl font-bold tracking-wide transition-all duration-700 ${
+                } px-5 p-1 md:rounded-3xl w-full md:w-auto text-center font-bold tracking-wide transition-all duration-700 ${
                   isTrendThisWeek1 ? "text-gray-100" : "text-[#1f2c3a]"
                 }`}
                 onClick={toggleTrendWeek1}
@@ -419,7 +476,7 @@ const Home = () => {
               <p
                 className={`${
                   isTrendThisWeek2 ? "bg-[#1f2c3a]" : null
-                } px-5 p-1 rounded-3xl font-bold tracking-wide transition-all duration-700 ${
+                } px-5 p-1 md:rounded-3xl w-full md:w-auto text-center font-bold tracking-wide transition-all duration-700 ${
                   isTrendThisWeek2 ? "text-gray-100" : "text-[#1f2c3a]"
                 }`}
                 onClick={toggleTrendWeek2}
@@ -429,7 +486,7 @@ const Home = () => {
             </div>
           </div>
           <div
-            className="contrast-100 bg-bottom flex gap-5 overflow-x-scroll px-10 pb-10 w-full bg-no-repeat"
+            className="contrast-100 bg-bottom flex gap-5 overflow-x-scroll md:px-10 px-5 pb-10 w-full bg-no-repeat"
             style={style2}
           >
             {weeklyTrends
@@ -442,17 +499,17 @@ const Home = () => {
                   >
                     {subActions === result.id ? (
                       <GiCancel
-                        className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
+                        className="absolute bg-gray-100 rounded-full md:ml-36 md:mt-3 z-50 md:text-2xl hover:bg-gray-400 text-3xl m-3"
                         onClick={() => selectItem(result.id)}
                       />
                     ) : (
                       <HiOutlineDotsCircleHorizontal
-                        className="absolute bg-gray-100 rounded-full ml-36 mt-3 z-50 text-2xl hover:bg-gray-400"
+                        className="absolute bg-gray-100 rounded-full md:ml-36 md:mt-3 z-50 md:text-2xl hover:bg-gray-400 text-2xl m-3"
                         onClick={() => selectItem(result.id)}
                       />
                     )}
                     <Link to={`/${result.id}`}>
-                      <figure className="h-60 w-44">
+                      <figure className="md:h-60 md:w-44 h-36 w-24">
                         <img
                           src={`http://image.tmdb.org/t/p/w500${
                             result.poster_path || result.profile_path
@@ -482,21 +539,49 @@ const Home = () => {
                       </p>
                     </Link>
                     {subActions === result.id && (
-                      <div className="bg-gray-100 w-32 shadow-xl flex flex-col items-center justify-center -mt-64 ml-28 absolute z-40 h-40 rounded">
-                        <div className="flex w-full items-center border-b-2 py-2 hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
-                          <MdOutlineList className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                      <div className="bg-gray-100 md:w-32 shadow-xl flex flex-col items-center justify-center md:-mt-64 md:ml-28 absolute z-40 h-40 rounded cursor-pointer -mt-36">
+                        <div
+                          className="flex w-full items-center border-b-2 py-2 hover:bg-slate-600 hover:text-gray-200 transition-all duration-500"
+                          onClick={() =>
+                            alert(
+                              "This feature is currently not implemented, please check other features."
+                            )
+                          }
+                        >
+                          <MdOutlineList className="md:ml-3 ml-1 mr-3 text-xl hover:scale-105" />{" "}
                           <p className="text-sm hover:scale-105">Add to list</p>
                         </div>
-                        <div className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
-                          <BsFillSuitHeartFill className="mr-3 ml-4 hover:scale-105" />{" "}
+                        <div
+                          className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 "
+                          onClick={() =>
+                            alert(
+                              "This feature is currently not implemented, please check other features."
+                            )
+                          }
+                        >
+                          <BsFillSuitHeartFill className="md:ml-3 ml-1 mr-3 text-xl hover:scale-105" />{" "}
                           <p className="text-sm hover:scale-105">Favorite</p>
                         </div>
-                        <div className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
-                          <BsFillBookmarkPlusFill className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                        <div
+                          className="flex w-full items-center  border-b-2 py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 "
+                          onClick={() =>
+                            alert(
+                              "This feature is currently not implemented, please check other features."
+                            )
+                          }
+                        >
+                          <BsFillBookmarkPlusFill className="md:ml-3 ml-1 mr-3 text-xl hover:scale-105" />{" "}
                           <p className="text-sm hover:scale-105">Watchlist</p>
                         </div>
-                        <div className="flex w-full items-center py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
-                          <MdStarRate className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
+                        <div
+                          className="flex w-full items-center py-2  hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 "
+                          onClick={() =>
+                            alert(
+                              "This feature is currently not implemented, please check other features."
+                            )
+                          }
+                        >
+                          <MdStarRate className="md:ml-3 ml-1 mr-3 text-xl hover:scale-105" />{" "}
                           <p className="text-sm hover:scale-105">Your Rating</p>
                         </div>
                       </div>

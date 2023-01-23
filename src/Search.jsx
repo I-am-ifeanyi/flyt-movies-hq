@@ -27,12 +27,12 @@ const Search = ({ toggleDisplaySearch }) => {
           onChange={searchQuery}
           value={query}
           placeholder="Search for a movie, tv show, a person ..."
-          className="w-[60%] p-2 px-10 ml-20 rounded-xl outline-0 text-sm"
+          className="md:w-[60%] p-2 px-10 py-3 ml-20 rounded-xl outline-0 md:text-sm text-xs"
           ref={focusPoint}
           onClick={focusOnSearch}
         />
         <button
-          className="ml-auto h-full px-8 py-2 bg-[#1f2c3a] text-white rounded-xl"
+          className="ml-auto mr-5 h-full text-sm md:text px-3 md:px-8 py-3 md:py-3 bg-[#1f2c3a] text-white rounded-xl"
           onClick={() => {
             toggleDisplaySearch, redirect();
           }}

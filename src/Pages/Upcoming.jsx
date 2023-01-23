@@ -94,14 +94,14 @@ const Upcoming = () => {
 
   return (
     <>
-      <h1 className="text-2xl font-semibold mb-5 mt-10 px-10">
+      <h1 className="text-2xl font-semibold mb-5 mt-10 px-5 md:px-10">
         Popular Movies
       </h1>
       {!popularArray ? (
         <ErrorPage />
       ) : (
         <div
-          className="px-10 mb-28 flex gap-10 justify-between"
+          className="px-5 md:px-10 mb-28 flex flex-col md:flex-row gap-10 justify-between"
           onClick={() => {
             if (subActions > 0) {
               setSubActions(0);
@@ -109,7 +109,7 @@ const Upcoming = () => {
           }}
         >
           {popularArray && (
-            <div className="w-1/3">
+            <div className="md:w-1/3">
               <div className="flex flex-col gap-5">
                 <div className="w-full rounded-lg border shadow-xl">
                   <div className="w-full h-auto border-b ">
@@ -475,15 +475,15 @@ const Upcoming = () => {
               </div>
             </div>
           )}
-          <div className="w-2/3">
-            <div className="flex mb-20 gap-4 flex-wrap relative">
+          <div className="md:w-2/3 w-full">
+            <div className="flex justify-around mb-20 gap-4 flex-wrap relative">
               {popularArray &&
                 popularArray
                   .filter((result) => result.poster_path && result.title)
                   .map((result) => {
                     return (
                       <div
-                        className="transition-all duration-700 w-[20%] border pb-1 rounded-lg bg-white hover:scale-105"
+                        className="transition-all duration-700 md:w-1/4 w-[45%] border pb-1 rounded-lg bg-white md:hover:scale-105"
                         key={result.id}
                       >
                         {subActions === result.id ? (
@@ -524,7 +524,7 @@ const Upcoming = () => {
                           </p>
                         </Link>
                         {subActions === result.id && (
-                          <div className="bg-gray-100 w-32 shadow-xl flex flex-col items-center justify-center -mt-64 ml-16 absolute z-50 h-40 rounded">
+                          <div className="bg-gray-100 md:w-32 shadow-xl flex flex-col items-center justify-center md:-mt-64 md:ml-28 absolute z-40 h-40 rounded cursor-pointer -mt-64">
                             <div className="flex w-full items-center border-b-2 py-2 hover:bg-slate-600 hover:text-gray-200 transition-all duration-500 ">
                               <MdOutlineList className="ml-3 mr-3 text-xl hover:scale-105" />{" "}
                               <p className="text-sm hover:scale-105">
@@ -555,7 +555,7 @@ const Upcoming = () => {
                     );
                   })}
             </div>
-            <div className="flex gap-5 mt-5">
+            <div className="flex gap-5 m-5">
               <button
                 className="border px-5 py-1 bg-gray-800 text-gray-200 hover:bg-gray-600 rounded-md"
                 onClick={() => {

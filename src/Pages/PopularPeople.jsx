@@ -18,7 +18,7 @@ const PopularPeople = () => {
   }, [popularPeoplePage]);
 
   return (
-    <div className="p-10">
+    <div className="md:p-10 p-5">
       <h1 className="font-semibold text-2xl">Popular People</h1>
       <div className="mt-10 flex flex-wrap justify-between w-full">
         {popularPeopleArray &&
@@ -27,7 +27,7 @@ const PopularPeople = () => {
             .map((result) => {
               return (
                 <div
-                  className="w-1/5 border shadow-lg bg-white rounded-lg pb-3 mb-5 mr-2"
+                  className="w-[45%] md:w-1/5 border shadow-lg bg-white rounded-lg pb-3 mb-5 mr-2"
                   key={result.id}
                 >
                    <Link to={`/${result.id}`}>

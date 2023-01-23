@@ -76,7 +76,6 @@ const SearchDetails = () => {
 
   const style = {
     backgroundImage: `linear-gradient(rgba(93, 109, 126), rgba(0, 0, 0, 0.623)), url('http://image.tmdb.org/t/p/w500${itemDetails.backdrop_path}')`,
-    backgroundAttachment: "fixed",
     backgroundPosition: "center",
     backgroundSize: "cover",
   };
@@ -102,7 +101,6 @@ const SearchDetails = () => {
   const toggleSeeMore = () => {
     setSeeMore((prev) => !prev);
   };
-  console.log(personsArray);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -112,7 +110,7 @@ const SearchDetails = () => {
     <>
       <div className="relative">
         <ul
-          className="text-xl gap-10 flex justify-center relative my-3 cursor-pointer text-gray-900"
+          className="md:text-xl gap-10 flex justify-center relative my-3 cursor-pointer text-gray-900"
           onClick={() =>
             alert(
               "This is a placeholder link for now, adequate features  will be  added in due time. Thank you!"
@@ -133,15 +131,15 @@ const SearchDetails = () => {
         </ul>
 
         {!personsArray.gender && !personsArray.profile_path ? (
-          <section className="border-4 h-[600px] border-[#1f2c3a] relative">
-            <div className="h-full w-full absolute" style={style}>
-              <div className="flex gap-10 justify-center items-center h-full px-10">
+          <section className="border-4 md:h-[600px] h-[80rem] w-full border-[#1f2c3a] relative ">
+            <div className="h-full w-full absolute md:bg-fixed py-5" style={style}>
+              <div className="flex md:flex-row flex-col  md:gap-10 md:justify-center justify-between md:items-center h-full md:px-10">
                 <figure
-                  className=" w-[350px] relative shrink-0 z-50 "
+                  className=" md:w-[350px] w-full h-[300px] md:h-auto relative shrink-0 z-10 px-4 md:px-0"
                   onMouseLeave={toggleIsHoveredFalse}
                 >
                   {isHovered && (
-                    <label className="text-gray-100 flex items-center justify-center gap-3 z-50 absolute top-[45%] left-[35%] bg-blue-900 p-1 rounded transition-all duration-700">
+                    <label className=" text-gray-100 flex items-center justify-center gap-3 z-50 absolute top-[45%] left-[35%] bg-blue-900 p-1 rounded transition-all duration-700">
                       <HiArrowsExpand className="text-2xl" />{" "}
                       <a
                         href={`http://image.tmdb.org/t/p/w500${itemDetails.poster_path}`}
@@ -154,7 +152,7 @@ const SearchDetails = () => {
                   <img
                     src={`http://image.tmdb.org/t/p/w500${itemDetails.poster_path}`}
                     alt={`${itemDetails.title || itemDetails.name} Poster`}
-                    className="w-full h-full rounded-t-xl hover:blur transition-all duration-500"
+                    className="w-full md:h-full rounded-t-xl md:hover:blur transition-all duration-500"
                     onMouseEnter={toggleIsHoveredTrue}
                   />
                   <a
@@ -171,9 +169,9 @@ const SearchDetails = () => {
                   </a>
                 </figure>
 
-                <aside className="z-50 flex flex-col gap-5 px-10  text-gray-100 font-bold max-h-screen  bg-black/30 py-10 tracking-wider ">
+                <aside className="z-50 flex flex-col gap-5 md:px-10 px-5  text-gray-100 font-bold max-h-screen  bg-black/30 py-5 md:py-10 tracking-wider ">
                   <div className="">
-                    <div className="flex gap-1 items-center text-3xl ">
+                    <div className="flex md:flex-row flex-col gap-1 items-center text-3xl ">
                       <h1 className="">
                         {itemDetails.title || itemDetails.name}
                       </h1>
@@ -253,16 +251,16 @@ const SearchDetails = () => {
             </div>
           </section>
         ) : (
-          <section className="my-20 px-10 relative">
-            <div className="flex gap-10">
-              <div>
+          <section className="my-5 px-5 md:my-20 md:px-10 relative w-full">
+            <div className="flex flex-col md:flex-row gap-10">
+              <div className="">
                 <Tooltip title={personsArray.homepage ? personsArray.homepage : "Website is Unavailable"} arrow>
-                  <figure className="w-[300px] h-[500px] shrink-0">
+                  <figure className="w-full h-[500px] md:shrink-0">
                     <a href={personsArray.homepage} target="_blank">
                       <img
                         src={`http://image.tmdb.org/t/p/w500${personsArray.profile_path}`}
                         alt={`${personsArray.name} picture`}
-                        className="w-full h-full hover:scale-105 transition-all duration-500 rounded"
+                        className="w-full h-full md:hover:scale-105 transition-all duration-500 rounded"
                       />
                     </a>
                   </figure>
@@ -341,7 +339,7 @@ const SearchDetails = () => {
                 </div>
               </div>
 
-              <aside className="w-3/4 h-auto overflow-hidden">
+              <aside className="w-full md:w-3/4 h-auto overflow-hidden">
                 <a href={personsArray.homepage} target="_blank">
                   <h1 className="text-3xl font-bold">{personsArray.name}</h1>
                 </a>
@@ -373,7 +371,7 @@ const SearchDetails = () => {
                       return (
                         <div
                           key={casts.id}
-                          className="w-[150px] h-[200px] shrink-0"
+                          className="w-[100px] h-[150px] md:w-[150px] md:h-[200px] shrink-0"
                         >
                           <Link to={`/${casts.id}`}>
                           <img
@@ -418,8 +416,8 @@ const SearchDetails = () => {
       </div>
 
       {!personsArray.gender && !personsArray.profile_path && (
-        <section className="flex gap-4 mt-10 pl-10 mb-10">
-          <div className="w-3/4">
+        <section className="flex md:flex-row flex-col gap-4 mt-10 pl-5 md:pl-10 mb-10">
+          <div className="md:w-3/4">
             <h1 className="text-2xl font-bold my-2">{`${
               category === "movie" ? "Movie" : "Series"
             }  Cast`}</h1>
@@ -515,14 +513,14 @@ const SearchDetails = () => {
       )}
 
       {!personsArray.gender && (
-        <section className="mx-10 mb-10">
+        <section className="mx-5 md:mx-10 mb-10">
           {!personsArray.gender && (
             <h1 className="text-2xl font-bold ">Media</h1>
           )}
           <div className="flex gap-5 my-4 overflow-x-scroll h-auto py-3">
             {movieOrTvVideos?.map((movies) => {
               return (
-                <div key={movies.key} className=" flex flex-col w-1/3">
+                <div key={movies.key} className=" flex flex-col md:w-1/3 w-1/2">
                   <iframe
                     width="full"
                     height="190"
@@ -549,7 +547,7 @@ const SearchDetails = () => {
         </section>
       )}
       {!personsArray.gender && !personsArray.profile_path && (
-        <section className="mx-10 mb-20 h-auto">
+        <section className="mx-5 md:mx-10 mb-20 h-auto">
           <h1 className="text-2xl font-bold">Recommendations</h1>
           <div className="flex gap-5 my-4 pb-24 overflow-x-scroll ">
             {similarItems?.map((items) => {

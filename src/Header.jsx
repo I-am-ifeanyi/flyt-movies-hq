@@ -26,7 +26,7 @@ const Header = () => {
   
 
   return (
-    <div className="flex items-center md:block p-2 md:p-0">
+    <div className="flex items-center md:block p-2 md:p-0 shadow-lg">
       <Link to="/">
         {" "}
         {!showNavLinks && (
@@ -43,11 +43,11 @@ const Header = () => {
         data-aos-duration="1000"
         className={`${
           showNavLinks ? "flex" : "hidden"
-        } bg-[#1f2c3a] text-gray-100 font-bold h-full md:h-10 md:px-10 py-8 md:flex  md:items-center cursor-pointer opacity-90 border-b-2 relative z-10 w-full text-2xl `}
+        } bg-[#1f2c3a] text-gray-100 font-bold h-full md:h-10 md:px-10 py-8 md:py-8 md:flex  md:items-center cursor-pointer opacity-90 border-b-2 relative z-10 w-full text-2xl `}
       >
         <Link to="/">
           {" "}
-          <h1 className="text-xl md:mr-10 p-1 rounded bg-gradient-to-r  from-purple-500 to-pink-500 hidden md:block">
+          <h1 className="text-xl md:mr-10 rounded bg-gradient-to-r  from-purple-500 to-pink-500 hidden md:block text-center">
             FlyT HQ
           </h1>
         </Link>
@@ -58,9 +58,9 @@ const Header = () => {
             <Link to="/">
               <li onClick={toggleNavLinks}>Home</li>
             </Link>
-            <li className=" transition-all duration-1000 flex">
+            <li className=" transition-all duration-1000 flex relative z-50">
               Movies
-              <ul className="nav-child-links border bg-[#1f2c3a] py-3 rounded hover:bg-[#1f2c3a] z-50 md:mt-8 ml-32 md:-ml-3 w-[150px]">
+              <ul className="nav-child-links border bg-[#1f2c3a] py-3 rounded hover:bg-[#1f2c3a] relative z-50 md:mt-8 ml-32 md:-ml-3 w-[150px]">
                 <Link to="Popular">
                   <li
                     className="hover:bg-[#141c24] px-5 py-2 rounded-lg  hover:transition-all hover:duration-500 hover:translate-y-1 text-lg border-b-2"
