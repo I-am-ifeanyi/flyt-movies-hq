@@ -1,19 +1,18 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { newContextAPI } from "./ContextAPI";
 
 import { FaPlus, FaTimes } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
 import { AiOutlineSearch } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
-import { GiHamburgerMenu } from "react-icons/gi"
-import { MdOutlineCancel } from "react-icons/md"
+import { GiHamburgerMenu } from "react-icons/gi";
+import { MdOutlineCancel } from "react-icons/md";
 
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
 // ..
 AOS.init();
-
 
 const Header = () => {
   const {
@@ -23,7 +22,6 @@ const Header = () => {
     showNavLinks,
     toggleNavLinks,
   } = useContext(newContextAPI);
-  
 
   return (
     <div className="flex items-center md:block p-2 md:p-0 shadow-lg">
@@ -45,61 +43,86 @@ const Header = () => {
           showNavLinks ? "flex" : "hidden"
         } bg-[#1f2c3a] text-gray-100 font-bold h-full md:h-10 md:px-10 py-8 md:py-8 md:flex  md:items-center cursor-pointer opacity-90 border-b-2 relative z-10 w-full text-2xl `}
       >
-        <Link to="/">
+        <NavLink to="/">
           {" "}
           <h1 className="text-xl md:mr-10 rounded bg-gradient-to-r  from-purple-500 to-pink-500 hidden md:block text-center">
             FlyT HQ
           </h1>
-        </Link>
+        </NavLink>
         <div
           className={`flex md:flex-row flex-col relative md:ml-auto md:justify-between md:w-full px-5 md:px-0 `}
         >
           <ul className="nav-links flex md:flex-row flex-col gap-[40px] relative text-xl mr-10">
-            <Link to="/">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "text-purple-500 underline" : " "
+              }
+            >
               <li onClick={toggleNavLinks}>Home</li>
-            </Link>
-            <li className=" transition-all duration-1000 flex relative z-50">
-              Movies
-              <ul className="nav-child-links border bg-[#1f2c3a] py-3 rounded hover:bg-[#1f2c3a] relative z-50 md:mt-8 ml-32 md:-ml-3 w-[150px]">
-                <Link to="Popular">
-                  <li
-                    className="hover:bg-[#141c24] px-5 py-2 rounded-lg  hover:transition-all hover:duration-500 hover:translate-y-1 text-lg border-b-2"
-                    onClick={toggleNavLinks}
-                  >
-                    Popular
-                  </li>
-                </Link>
-                <Link to="Upcoming">
-                  <li
-                    className="hover:bg-[#141c24] px-5 py-2 rounded-lg  hover:transition-all hover:duration-500 hover:translate-y-1 text-lg "
-                    onClick={toggleNavLinks}
-                  >
-                    Upcoming
-                  </li>
-                </Link>
-              </ul>
-            </li>
-            <li className=" transition-all duration-1000 flex">
-              TV Shows
-              <ul className="nav-child-links border py-3 rounded hover:bg-[#1f2c3a] md:mt-8 ml-32 md:-ml-3 w-[150px]">
-                <Link to="Airing-Today">
-                  <li
-                    className="hover:bg-[#141c24] px-5 py-2 rounded-lg  hover:transition-all hover:duration-500 hover:translate-y-1 text-lg border-b-2"
-                    onClick={toggleNavLinks}
-                  >
-                    Airing Today
-                  </li>
-                </Link>
-                <Link to="Top-Rated">
-                  <li
-                    className="hover:bg-[#141c24] px-5 py-2 rounded-lg  hover:transition-all hover:duration-500 hover:translate-y-1 text-lg"
-                    onClick={toggleNavLinks}
-                  >
-                    Top Rated
-                  </li>
-                </Link>
-              </ul>
-            </li>
+            </NavLink>
+            <NavLink
+              to="Popular"
+              className={({ isActive }) =>
+                isActive ? "text-purple-500 underline" : " "
+              }
+            >
+              <li className=" transition-all duration-1000 flex relative z-50">
+                Movies
+                <ul className="nav-child-links border bg-[#1f2c3a] py-3 rounded hover:bg-[#1f2c3a] relative z-50 md:mt-8 ml-32 md:-ml-3 w-[150px]">
+                  <Link to="Popular">
+                    <li
+                      className="hover:bg-[#141c24] px-5 py-2 rounded-lg  hover:transition-all hover:duration-500 hover:translate-y-1 text-lg border-b-2"
+                      onClick={toggleNavLinks}
+                    >
+                      Popular
+                    </li>
+                  </Link>
+                  <Link to="Upcoming">
+                    <li
+                      className="hover:bg-[#141c24] px-5 py-2 rounded-lg  hover:transition-all hover:duration-500 hover:translate-y-1 text-lg "
+                      onClick={toggleNavLinks}
+                    >
+                      Upcoming
+                    </li>
+                  </Link>
+                </ul>
+              </li>
+            </NavLink>
+            <NavLink
+              to="Airing-Today"
+              className={({ isActive }) =>
+                isActive ? "text-purple-500 underline" : " "
+              }
+            >
+              <li className=" transition-all duration-1000 flex">
+                TV Shows
+                <ul className="nav-child-links border py-3 rounded hover:bg-[#1f2c3a] md:mt-8 ml-32 md:-ml-3 w-[150px]">
+                  <Link to="Airing-Today">
+                    <li
+                      className="hover:bg-[#141c24] px-5 py-2 rounded-lg  hover:transition-all hover:duration-500 hover:translate-y-1 text-lg border-b-2"
+                      onClick={toggleNavLinks}
+                    >
+                      Airing Today
+                    </li>
+                  </Link>
+                  <Link to="Top-Rated">
+                    <li
+                      className="hover:bg-[#141c24] px-5 py-2 rounded-lg  hover:transition-all hover:duration-500 hover:translate-y-1 text-lg"
+                      onClick={toggleNavLinks}
+                    >
+                      Top Rated
+                    </li>
+                  </Link>
+                </ul>
+              </li>
+            </NavLink>
+             <NavLink
+              to="Popular-People"
+              className={({ isActive }) =>
+                isActive ? "text-purple-500 underline" : " "
+              }
+            >
             <li className=" transition-all duration-1000 flex">
               People
               <ul className="nav-child-links border py-3 rounded hover:bg-[#1f2c3a] md:mt-8 ml-32 md:-ml-3 md: w-[170px]">
@@ -112,7 +135,8 @@ const Header = () => {
                   </li>
                 </Link>
               </ul>
-            </li>
+              </li>
+              </NavLink>
             <li className=" transition-all duration-1000 flex">
               More
               <ul

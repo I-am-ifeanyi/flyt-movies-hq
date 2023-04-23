@@ -74,6 +74,8 @@ const Home = () => {
     } else return;
   };
 
+  console.log(selectedCategory)
+
   // useEffect(() => {
   //   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   // }, []);

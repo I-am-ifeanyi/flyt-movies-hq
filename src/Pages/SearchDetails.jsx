@@ -106,6 +106,8 @@ const SearchDetails = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [category, searchDetails]);
 
+  console.log(itemDetails)
+
   return (
     <>
       <div className="relative">
